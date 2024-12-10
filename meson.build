@@ -1,4 +1,4 @@
-project('OPTIMIZMate', 'cpp', default_options : ['cpp_std=c++20'])
+project('xyz', 'cpp', default_options : ['cpp_std=c++20'])
 
 incdir = [include_directories('inc')]
 
