@@ -51,14 +51,14 @@ CONFIGURE_TIMESTAMP:=${BUILD_DIR}/.configure.timestamp
 
 ifeq (${USE_CONAN}, 1)
 	CONAN_CMD?=conan install . --output-folder="${BUILD_DIR}" --build=missing &&
-	MESON_NATIVE_FILE?=--native-file ${BUILD_DIR}/conan_meson_native.ini
+	MESON_NATIVE_FILE?=--native-file "${BUILD_DIR}/conan_meson_native.ini"
 endif
 
 ifeq (${REL2ABS_PATH}, 1)
 	REL2ABS_CMD:=| sed "s|\.\./|${PWD}/|g"
 endif
 
-CONFIGURE_CMD:=${CONAN_CMD} meson setup "${BUILD_DIR}" --buildtype "${BUILD_TYPE}" ${MESON_DEBUG_FLAGS} "${MESON_NATIVE_FILE}" ${MESON_EXTRA_CONFIGURE_FLAGS} ${REL2ABS_CMD}
+CONFIGURE_CMD:=${CONAN_CMD} meson setup "${BUILD_DIR}" --buildtype "${BUILD_TYPE}" ${MESON_DEBUG_FLAGS} ${MESON_NATIVE_FILE} ${MESON_EXTRA_CONFIGURE_FLAGS} ${REL2ABS_CMD}
 BUILD_CMD:=meson compile -C "${BUILD_DIR}" ${MESON_BUILD_FLAGS} ${REL2ABS_CMD}
 TEST_CMD:=meson test -C "${BUILD_DIR}" ${MESON_TEST_FLAGS} ${REL2ABS_CMD}
 
